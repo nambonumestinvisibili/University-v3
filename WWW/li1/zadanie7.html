@@ -19,21 +19,7 @@
     </style>
 </head>
 
-<script>
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd
-    }
-    if (mm < 10) {
-        mm = '0' + mm
-    }
 
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("mindate").setAttribute("max", today);
-</script>
 
 <body>
     <form id="transaction">
@@ -62,10 +48,26 @@
         <input type="number" id="kwota" name="kwota" min="0" max="50000" step="100" value="0" required/>
 
         <label for="data">Data przelwu</label>
-        <input type="date" id="data" min="mindate" value="mindate" name="data" required />
+        <input type="date" id="data" name="data" required />
 
         <button type="submit" id="submit" name="submit" onclick="">Wyślij</button>
     </form>
+
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+    
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("mindate").setAttribute("max", today);
+    </script>
 </body>
 
 
