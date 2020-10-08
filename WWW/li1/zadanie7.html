@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        To jest zadanie 7
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+        }
+        
+        input {
+            display: block;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+
+<script>
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("mindate").setAttribute("max", today);
+</script>
+
+<body>
+    <form id="transaction">
+        <label for="konto">Numer konta</label>
+        <input type="text" id="konto" name="konto" placeholder="26 cyfr" pattern="[0-9]{26}" required />
+
+        <label for="imie">Imię</label>
+        <input type="text" id="imie" name="imie" pattern="[A-Z]{1}[a-z]{1,}" required />
+
+        <label for="nazwisko">Nazwisko</label>
+        <input type="text" id="nazwisko" name="nazwisko" pattern="[A-Z]{1}[a-z]{1,}" required />
+
+        <label for="mail">E-mail</label>
+        <input type="email" id="mail" name="mail" />
+
+        <label for="miasto">Miasto</label>
+        <input type="text" id="miasto" name="miasto" pattern="[A-Z]{1}[a-z]{1,}" />
+
+        <label for="kod">Kod pocztowy</label>
+        <input type="text" id="kod" name="kod" pattern="\d\d-\d\d\d" />
+
+        <label for="adres">Adres</label>
+        <input type="text" id="adres" name="adres" pattern="[A-Z]{1}[a-z]{1,} [0-9]{1,}" />
+
+        <label for="kwota">Kwota przelewu</label>
+        <input type="number" id="kwota" name="kwota" min="0" max="50000" step="100" value="0" required/>
+
+        <label for="data">Data przelwu</label>
+        <input type="date" id="data" min="mindate" value="mindate" name="data" required />
+
+        <button type="submit" id="submit" name="submit" onclick="">Wyślij</button>
+    </form>
+</body>
+
+
+</html>
