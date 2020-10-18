@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        To jest zadanie
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .input-field {
+            position: relative;
+            width: 300px;
+            /* border: 1px solid red; */
+        }
+
+        input {
+            position: absolute;
+            border: 0;
+            border-bottom: 1px solid #d3d3d3;
+            transition: 1s all;
+        }
+
+        label {
+            position: absolute;
+            top: 0px;
+            color: #d3d3d3;
+            transition: 0.2s all;
+        }
+
+        input[type="text"]:focus {
+            border-bottom: 1px solid black;
+            outline: 0;
+            width: 100%;
+        }
+
+        input[type="text"]:focus~label {
+            font-size: 13px;
+            top: 19px;
+            color: black;
+        }
+
+        input[type="text"]:valid~label {
+            top: 19px;
+            color: greenyellow;
+            font-size: 13px;
+        }
+
+        input[type="text"]:valid {
+            border-bottom: 1px solid greenyellow;
+        }
+
+        input[type="submit"] {
+            background-color: white;
+            border: 0;
+            border-bottom: 1px solid #d3d3d3;
+            color: #d3d3d3;
+            transition: 0.5s all;
+        }
+
+        input[type="submit"]:hover {
+            color: black;
+            background-color: greenyellow;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+
+</body>
+<form>
+    <div class="input-field">
+        <input type="text" id="fname" name="fname" required><br>
+        <label for="fname">First name</label><br>
+    </div>
+    <div class="input-field">
+        <input type="text" id="sname" name="sname" required><br>
+        <label for="sname">Surname</label><br>
+    </div>
+    <div class="input-field">
+        <input type="text" id="address" name="address" required><br>
+        <label for="address">Address</label><br>
+    </div>
+    <br>
+    <input type="submit" value="Submit">
+
+</form>
+
+</html>

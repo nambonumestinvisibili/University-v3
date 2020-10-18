@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        To jest zadanie
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        input[type="text"] {
+            background-color: tomato;
+        }
+        
+        div p {
+            background-color: darkred;
+        }
+        
+        section>p {
+            background-color: deepskyblue;
+        }
+        
+        article+p {
+            background-color: gold;
+        }
+        
+        .paragrafy {
+            background-color: hotpink;
+        }
+        
+        #id1 {
+            background-color: indigo;
+        }
+        
+        #id2 {
+            background-color: lawngreen;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>type</h3>
+    <input type="text"><br>
+    <input type="text"><br>
+    <input type="date"><br>
+    <input type="text"><br>
+    <input type="text"><br>
+
+    <h3>descendant</h3>
+
+    <div>
+        <p>p in div</p>
+        <p>p in div</p>
+        <article>
+            <p>p in article in div</p>
+        </article>
+    </div>
+    <p>p not in div</p>
+    <p>p not in div</p>
+
+    <h3>child</h3>
+
+    <section>
+        <p>p in section</p>
+        <p>p in section</p>
+        <article>
+            <p>p in div in section!</p>
+        </article>
+    </section>
+    <p>p not in section</p>
+    <p>p not in section</p>
+
+    <h3>adjacent - p1 + p2, p1 brat p2, p2 jest od razu po p1</h3>
+
+    <article>
+        <article>
+            <p>p in article in article</p>
+            <p>p in article in article</p>
+        </article>
+
+        <p>p in article</p>
+        <p>p in article</p>
+    </article>
+
+    <h3>id - jest unikatowy</h3>
+
+    <p class="paragrafy">Paragraf z klasy paragrafy</p>
+    <p class="paragrafy">Paragraf z klasy paragrafy</p>
+    <p class="paragrafy">Paragraf z klasy paragrafy</p>
+    <p class="paragrafy">Paragraf z klasy paragrafy</p>
+    <p id="id1">Paragraf z unikatowym id2</p>
+    <p id="id2">Paragraf z unikatowym id1</p>
+
+
+
+    <h3>class - dla wielu</h3>
+
+</body>
+
+
+</html>

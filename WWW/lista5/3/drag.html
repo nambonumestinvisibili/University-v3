@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        Dawid Holewa 317898
+    </title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            background-color: darkgray;
+        }
+        
+        #palette {
+            position: relative;
+            height: 100px;
+            width: 500px;
+            display: block;
+            background-color: lightgray;
+            margin: 0 auto;
+            text-align: justify;
+            text-align-last: center;
+        }
+        
+        #palette div {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 20px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        #palette div:hover {
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: 20px;
+            width: 50px;
+            height: 50px;
+            filter: brightness(85%);
+        }
+        
+        #palette div:nth-child(1) {
+            background-color: yellowgreen;
+        }
+        
+        #palette div:nth-child(2) {
+            background-color: lightpink;
+        }
+        
+        #palette div:nth-child(3) {
+            background-color: lightseagreen;
+        }
+        
+        #palette div:nth-child(4) {
+            background-color: orange;
+        }
+        
+        #palette div:nth-child(5) {
+            background-color: black;
+        }
+        
+        td {
+            width: 80px;
+            height: 80px;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        
+        td.pi {
+            border: 1px solid black;
+        }
+        
+        #playground {
+            width: 500px;
+            display: block;
+            margin: 0 auto;
+            margin-top: 30px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="palette">
+        <div draggable="true" ondragstart="drag(event)"></div>
+        <div draggable="true" ondragstart="drag(event)"></div>
+        <div draggable="true" ondragstart="drag(event)"></div>
+        <div draggable="true" ondragstart="drag(event)"></div>
+        <div draggable="true" ondragstart="drag(event)"></div>
+    </div>
+
+    <div id="playground">
+        <p>Pokoloruj liczbę pi!</p>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="pi"></td>
+                    <td class="pi"></td>
+                    <td class="pi"></td>
+                    <td class="pi"></td>
+                    <td class="pi"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                    <td class="pi"></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    var pis = document.getElementsByClassName("pi")
+    for (var every of pis) {
+        every.setAttribute("ondrop", "drop(event)")
+        every.setAttribute("ondragover", "allowDrop(event)")
+    }
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        var color = window.getComputedStyle(ev.target).getPropertyValue('background-color');
+        console.log(color)
+        ev.dataTransfer.setData("text", color)
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.style.backgroundColor = data;
+        ev.target.style.border = "none";
+    }
+</script>
+
+
+</html>

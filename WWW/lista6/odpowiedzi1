@@ -1,0 +1,105 @@
+#zadanie 1:
+
+komenda:
+powershell: nslookup witrynawww
+
+##1.1 Adresy ip
+
+nslookup www.ii.uni.wroc.pl
+Server:  DWR-921E.DWR-921E //chyba mój serwer
+Address:  192.168.0.1
+
+Non-authoritative answer:
+Name:    ii.uni.wroc.pl
+Address:  156.17.4.11
+Aliases:  www.ii.uni.wroc.pl
+
+PS C:\Users\dawid\OneDrive> nslookup www.uj.edu.pl
+Server:  DWR-921E.DWR-921E
+Address:  192.168.0.1
+
+Non-authoritative answer:
+Name:    www.uj.edu.pl
+Address:  149.156.169.67
+
+##1.2 Adresy ip z autorytatywnego serwera DNS
+
+PS C:\Users\dawid\OneDrive> nslookup -type=soa www.uj.edu.pl
+Server:  DWR-921E.DWR-921E
+Address:  192.168.0.1
+
+uj.edu.pl
+        primary name server = theta.uoks.uj.edu.pl
+        responsible mail addr = hostmaster.theta.uoks.uj.edu.pl
+        serial  = 2018072984
+        refresh = 10800 (3 hours)
+        retry   = 3600 (1 hour)
+        expire  = 2419200 (28 days)
+        default TTL = 900 (15 mins)
+PS C:\Users\dawid\OneDrive> nslookup -type=soa www.ii.uni.wroc.pl
+Server:  DWR-921E.DWR-921E
+Address:  192.168.0.1
+
+Non-authoritative answer:
+www.ii.uni.wroc.pl      canonical name = ii.uni.wroc.pl
+ii.uni.wroc.pl
+        primary name server = hermes.ii.uni.wroc.pl
+        responsible mail addr = admin.cs.uni.wroc.pl
+        serial  = 2020063001
+        refresh = 1800 (30 mins)
+        retry   = 3600 (1 hour)
+        expire  = 259200 (3 days)
+        default TTL = 86400 (1 day)
+
+ii.uni.wroc.pl  nameserver = apollo.ii.uni.wroc.pl
+ii.uni.wroc.pl  nameserver = hermes.ii.uni.wroc.pl
+apollo.ii.uni.wroc.pl   internet address = 156.17.4.2
+hermes.ii.uni.wroc.pl   internet address = 156.17.4.1
+
+##1.3
+-type=mx
+
+nslookup -type=mx www.ii.uni.wroc.pl
+Server:  DWR-921E.DWR-921E
+Address:  192.168.0.1
+
+Non-authoritative answer:
+www.ii.uni.wroc.pl      canonical name = ii.uni.wroc.pl
+ii.uni.wroc.pl  MX preference = 5, mail exchanger = ALT2.ASPMX.L.GOOGLE.COM
+ii.uni.wroc.pl  MX preference = 10, mail exchanger = ASPMX2.GOOGLEMAIL.COM
+ii.uni.wroc.pl  MX preference = 1, mail exchanger = ASPMX.L.GOOGLE.COM
+ii.uni.wroc.pl  MX preference = 10, mail exchanger = ASPMX3.GOOGLEMAIL.COM
+ii.uni.wroc.pl  MX preference = 5, mail exchanger = ALT1.ASPMX.L.GOOGLE.COM
+
+ii.uni.wroc.pl  nameserver = hermes.ii.uni.wroc.pl
+ii.uni.wroc.pl  nameserver = apollo.ii.uni.wroc.pl
+aspmx.l.google.com      internet address = 74.125.206.26
+alt1.aspmx.l.google.com internet address = 209.85.233.26
+alt2.aspmx.l.google.com internet address = 142.250.4.26
+aspmx2.googlemail.com   internet address = 209.85.233.26
+apollo.ii.uni.wroc.pl   internet address = 156.17.4.2
+hermes.ii.uni.wroc.pl   internet address = 156.17.4.1
+aspmx.l.google.com      AAAA IPv6 address = 2a00:1450:400c:c09::1a
+alt1.aspmx.l.google.com AAAA IPv6 address = 2404:6800:4008:c00::1a
+alt2.aspmx.l.google.com AAAA IPv6 address = 2404:6800:4003:c06::1b
+aspmx2.googlemail.com   AAAA IPv6 address = 2a00:1450:4010:c03::1b
+
+nslookup -type=mx www.uj.edu.pl
+Server:  DWR-921E.DWR-921E
+Address:  192.168.0.1
+
+Non-authoritative answer:
+www.uj.edu.pl   MX preference = 0, mail exchanger = mailin1b.srv.uj.edu.pl
+www.uj.edu.pl   MX preference = 0, mail exchanger = mailin1a.srv.uj.edu.pl
+
+uj.edu.pl       nameserver = jetta.uoks.uj.edu.pl
+uj.edu.pl       nameserver = io.coi.pw.edu.pl
+uj.edu.pl       nameserver = theta.uoks.uj.edu.pl
+uj.edu.pl       nameserver = nms.cyf-kr.edu.pl
+uj.edu.pl       nameserver = europa.coi.pw.edu.pl
+io.coi.pw.edu.pl        internet address = 194.29.128.1
+nms.cyf-kr.edu.pl       internet address = 149.156.1.3
+jetta.uoks.uj.edu.pl    internet address = 149.156.89.2
+theta.uoks.uj.edu.pl    internet address = 149.156.89.30
+europa.coi.pw.edu.pl    internet address = 194.29.128.2
+nms.cyf-kr.edu.pl       AAAA IPv6 address = 2001:6d8:0:1::a:3

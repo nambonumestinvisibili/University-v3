@@ -1,0 +1,372 @@
+* {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+@font-face {
+    font-family: niceFont;
+    src: url("Righteous-Regular.ttf");
+}
+
+
+/* Obrazek i rozmazywanie */
+
+.image {
+    width: 500px;
+    height: auto;
+}
+
+div.container:hover .image {
+    filter: blur(8px);
+}
+
+
+/* Div-Container */
+
+.container {
+    position: relative;
+    /* Żeby obrazek mógł być absolute */
+    min-width: 250px;
+    min-height: 250px;
+    padding: 13px;
+    display: inline-block;
+    /* W ten sposób rozmiar diva jest taki jak obrazka */
+    border: 1px solid green;
+}
+
+
+/* Titles Ant X */
+
+.text {
+    position: absolute;
+    top: 0px;
+    left: 4%;
+}
+
+
+/* LoremIpsum */
+
+p.text {
+    position: absolute;
+    top: 50px;
+    left: 4%;
+}
+
+div.text {
+    position: absolute;
+    left: 25%;
+    top: 25%;
+}
+
+
+/* Titles and Lorem visibility */
+
+div.container:not(:hover) .text {
+    display: none;
+}
+
+div.container:hover .text {
+    display: inline;
+}
+
+
+/* Animacje dla zdjęć */
+
+
+/* Obrazek 1 i przesuwanie tekstu */
+
+h3.text#d1 {
+    animation-name: changePositionh3;
+    animation-duration: 4s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards
+}
+
+p.text#d1 {
+    animation-name: changePositionp;
+    animation-duration: 3s;
+    animation-fill-mode: forwards
+}
+
+@keyframes changePositionh3 {
+    to {
+        top: 58%;
+    }
+}
+
+@keyframes changePositionp {
+    to {
+        top: 65%;
+    }
+}
+
+
+/* Obrazek 2 i podświetlenie Tytułu */
+
+div#d2 {
+    width: 050px;
+    height: 20px;
+    background-color: violet;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: block;
+}
+
+div.container:hover div.text#d2 {
+    animation-name: d2Line;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+div.container:not(:hover) div.text#d2 {
+    display: none;
+}
+
+@keyframes d2Line {
+    from {
+        width: 0px;
+    }
+    ;
+    to {
+        width: 50px;
+    }
+}
+
+
+/* Obrazek 3 i literka po literce*/
+
+p#d3 {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 40em;
+    animation: type 3s steps(60, end);
+}
+
+@keyframes type {
+    from {
+        width: 0;
+    }
+}
+
+
+/* Obrazek 4 i pojawianie się tekstu */
+
+h3.text#d4 {
+    opacity: 0%;
+    animation-name: changePositionh4;
+    animation-duration: 4s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards
+}
+
+p.text#d4 {
+    opacity: 0%;
+    animation-name: changePositionp4;
+    animation-duration: 3s;
+    animation-fill-mode: forwards
+}
+
+@keyframes changePositionh4 {
+    to {
+        top: 58%;
+        opacity: 100%;
+    }
+}
+
+@keyframes changePositionp4 {
+    to {
+        top: 65%;
+        opacity: 100%;
+    }
+}
+
+
+/* Obrazek 5 i szybkie pojawienie się */
+
+p.text#d5:hover {
+    opacity: 40%;
+    animation-name: changeColour;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes changeColour {
+    to {
+        background-color: lightyellow;
+        top: 20%;
+        left: 1%;
+    }
+}
+
+
+/* Obrrazek 6 i swing */
+
+p.text#d6:hover {
+    animation: swing 1s ease;
+}
+
+@keyframes swing {
+    15% {
+        transform: translateX(5px);
+    }
+    30% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(3px);
+    }
+    65% {
+        transform: translateX(-3px);
+    }
+    80% {
+        transform: translateX(2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* Obrazek 7 */
+
+* {
+    font-family: niceFont;
+}
+
+#flip {
+    font-size: 40px;
+    height: 60px;
+    overflow: hidden;
+    text-align: center;
+}
+
+#flip>div>div {
+    /*ants bees bugs*/
+    color: #fff;
+    padding: 4px 12px;
+    height: 45px;
+    margin-bottom: 45px;
+    display: inline-block;
+}
+
+#flip div:first-child {
+    animation: show 5s linear infinite;
+}
+
+#flip div div {
+    background: #0de785;
+}
+
+#flip div:first-child div {
+    background: #4ec7f3;
+}
+
+#flip div:last-child div {
+    background: #DC143C;
+}
+
+@keyframes show {
+    0% {
+        margin-top: -270px;
+    }
+    5% {
+        margin-top: -180px;
+    }
+    33% {
+        margin-top: -180px;
+    }
+    38% {
+        margin-top: -90px;
+    }
+    66% {
+        margin-top: -90px;
+    }
+    71% {
+        margin-top: 0px;
+    }
+    99.99% {
+        margin-top: 0px;
+    }
+    100% {
+        margin-top: -270px;
+    }
+}
+
+
+/* Obrazek 8 */
+
+#d8 .text {
+    font-family: niceFont;
+    font-size: 70px;
+    position: absolute;
+    text-align: center;
+    right: 20%;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+#d8 p {
+    position: absolute;
+}
+
+@keyframes rainbow {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+#d81 {
+    /* transform: translateX(10px); */
+    /* right: 100px; */
+    color: yellow;
+    animation: rainbow 1.5s ease-in-out infinite;
+    animation-delay: 0.05s;
+}
+
+#d82 {
+    /* transform: translateX(20px); */
+    color: greenyellow;
+    animation: rainbow 1.5s linear infinite;
+    animation-delay: 0.1s;
+}
+
+#d83 {
+    /* transform: translateX(30px); */
+    color: lightseagreen;
+    animation: rainbow 1.5s ease-in-out infinite;
+    animation-delay: 0.15s;
+}
+
+#d84 {
+    /* transform: translateX(40px); */
+    color: blueviolet;
+    animation: rainbow 1.5s ease-in-out infinite;
+    animation-delay: 0.20s;
+}
+
+#d85 {
+    /* transform: translateX(50px); */
+    color: lightcoral;
+    animation: rainbow 1.5s ease-in-out infinite;
+    animation-delay: 0.25s;
+}
+
+#d86 {
+    /* transform: translateX(60px); */
+    color: chocolate;
+    animation: rainbow 1.5s ease-in-out infinite;
+    animation-delay: 0.30s;
+}
+
+#d87 {
+    right: 80%;
+    color: white;
+    animation: rainbow 1.5s ease-in-out infinite;
+    animation-delay: 0.35s;
+}

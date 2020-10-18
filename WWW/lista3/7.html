@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        Dawid Holewa 317898
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        header {
+            display: flex;
+        }
+        
+        #div1 {
+            height: 150px;
+            background-color: greenyellow;
+            flex-basis: 400px;
+            flex-grow: 10;
+            flex-shrink: 0;
+        }
+        
+        #div2 {
+            height: 150px;
+            background-color: hotpink;
+            flex-basis: 400px;
+            flex-grow: 1;
+            flex-shrink: 10;
+        }
+    </style>
+</head>
+
+<!-- Oba na poczatku maja po 400px, jesli:
+- okno ma 800 px, to oba maja po 400 px i sa rowne ok.
+- okno > 800 px, to wtedy czesc, ktora jest niezajmowana przez zaden z 
+boksow, jest dzielona wedlug flex-grow
+- okno < 800 px, to wtedy dziala flex-shrink, tylko ze zamiast z wolnym miejscem,
+to dziala z tym miejscem, ktore w blokach nie jest zajmowane przez tresc. -->
+
+<body>
+    <header>
+        <div id="div1">
+            One
+        </div>
+        <div id="div2">
+            Two
+        </div>
+    </header>
+</body>
+
+
+</html>

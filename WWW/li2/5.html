@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        To jest zadanie
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        /* Co tu robimy, to ustawiamy sobie dowolnie wrapper, ktory ma pozycje relatywna
+        natomiast elementy wewnatrz ustawiamy na absolute i dopasowujemy jak chcemy relatywnie do
+        rodzica-wrappera */
+        * {
+            box-sizing: border-box;
+        }
+        div {
+            left: 600px;
+            border: 3px solid #272838;
+        }
+
+        .wrapper {
+            background-color: #272838;
+
+            position: relative;
+            height: 110px;
+            width: 550px;
+        }
+
+        .image {
+            background-color: #792359;
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            display: block;
+
+            top: 1px;
+            bottom: 0px;
+            left: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 15px;
+        }
+        .info {
+            background-color: #792359;
+            top:1px;
+            position: absolute;
+            left: 130px;
+            height: 100px;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="image">
+
+        </div>
+        <div class="info">
+
+        </div>
+    </div>
+</body>
+
+
+</html>

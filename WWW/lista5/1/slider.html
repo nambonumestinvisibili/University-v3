@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        Dawid Holewa 317898
+    </title>
+    <meta charset="UTF-8">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
+
+    <style>
+        * {
+            background-color: black;
+        }
+        
+        .images {
+            width: 540px;
+            height: 360px;
+            display: none;
+        }
+        
+        #slider {
+            width: 300px;
+            margin: 0 auto;
+        }
+        
+        #slideshow {
+            width: 540px;
+            position: relative;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="slider"></div>
+    <br>
+    <br>
+    <div id="slideshow">
+        <div class="containers">
+            <img class="images" src="i0.jpg" alt="" style="display: block;">
+        </div>
+        <div class="containers">
+            <img class="images" src="i1.jpg" alt="">
+        </div>
+        <div class="containers">
+            <img class="images" src="i2.jpg" alt="">
+        </div>
+        <div class="containers">
+            <img class="images" src="i3.jpg" alt="">
+        </div>
+    </div>
+
+    <script>
+        var collection = $(".images");
+        var idx = 0;
+        var time = 2000;
+
+        var Interval;
+
+        //pausing on hover
+        function startSlide(time) {
+            Interval = setInterval(changeDisplay, time);
+        }
+
+        function stopSlide() {
+            clearInterval(Interval)
+        }
+
+        $(function() {
+            $("#slider").slider({
+                max: 5,
+                min: 1,
+                step: 1,
+                change: function(event, ui) {
+                    time = ui.value * 1000;
+                    stopSlide()
+                    startSlide(time)
+                }
+            });
+
+            startSlide(time);
+
+            $('#slideshow').hover(function() {
+                stopSlide();
+            }, function() {
+                startSlide(time);
+            })
+        });
+
+        function changeDisplay() {
+            idx++;
+            index = idx % 4;
+            for (var i = 0; i < collection.length; i++) {
+                var j = i + 1
+                if (i == index) {
+                    collection[i].style.display = "block"
+                    $("#slideshow div:nth-child(" + j + ")").slideDown() //.fadeOut()
+                } else {
+                    collection[i].style.display = "none"
+                    $("#slideshow div:nth-child(" + j + ")").slideUp() //.fadeIn()
+
+                }
+            }
+        }
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        To jest zadanie 5
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        p:first-of-type {
+            background-color: rebeccapurple;
+        }
+        
+        p:last-of-type {
+            background-color: lightslategrey;
+        }
+        
+        p:nth-of-type(2) {
+            background-color: saddlebrown;
+        }
+        
+        p:nth-last-of-type(2) {
+            background-color: sandybrown;
+        }
+        
+        span:only-of-type {
+            background-color: rosybrown;
+        }
+        
+        p:nth-child(4):after {
+            content: "     Każde nte dziecko";
+            background-color: lightseagreen;
+        }
+        
+        P:nth-last-child(5)::after {
+            content: "     Każde nte dziecko od tyłu";
+            background-color: magenta;
+        }
+        
+        p:last-child::after {
+            content: " Ostatnie dzieko";
+            background-color: maroon;
+        }
+        
+         :root {
+            background-color: lightcyan;
+        }
+        
+         ::selection {
+            background-color: red;
+        }
+        
+         :not() {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Różnica -->
+    <div class="parent">
+        <h1>Child</h1>
+        <!-- h1:first-child, h1:first-of-type -->
+        <div>Child</div>
+        <!-- div:nth-child(2), div:first-of-type -->
+        <div>Child</div>
+        <div>Child</div>
+    </div>
+
+    <div>
+        <p>Paragraf 1 div -> p first of type</p>
+        <p>Paragraf 2 div -> p nth(2nd) of type</p>
+        <span>Span only of type</span>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p nth(2nd) last of type</p>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p </p>
+        <p>Paragraf div -> p last of type</p>
+    </div>
+
+    <br><br><br><br><br>
+
+    <section>
+        <span>Span not only of type</span><br>
+        <span>Span not only of type</span>
+        <p>Paragraf z section</p>
+        <p>Paragraf z section</p>
+        <p>Paragraf z section</p>
+        <p>Paragraf z section</p>
+        <p>Paragraf z section</p>
+        <p>Paragraf z section</p>
+        <p>Paragraf z section</p>
+        <br><br><br><br><br>
+
+        <div>
+            <p>Paragraf z div z section</p>
+            <p>Paragraf z div z section</p>
+            <p>Paragraf z div z section</p>
+            <p>Paragraf z div z section</p>
+            <p>Paragraf z div z section</p>
+            <p>Paragraf z div z section</p>
+            <p>Paragraf z div z section</p>
+        </div>
+        <br><br><br><br><br>
+        <article>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+            <p>Paragraf z article z section</p>
+
+        </article>
+    </section>
+</body>
+
+
+</html>

@@ -1,0 +1,120 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0 auto;
+}
+
+nav {
+    margin: 0 auto;
+    background-color: #343a40;
+    height: 50px;
+}
+
+nav a {
+    display: inline-block;
+    color: gray;
+    text-decoration: none;
+    top: 4px;
+}
+
+header {
+    background-color: #00669e;
+}
+
+#newsfeed, #sites {
+    display: block;
+    position: relative;
+    top: 100px;
+    margin: auto;
+    width: 1000px;
+    height: 750px;
+}
+
+#newsfeed h1 {
+    font-size: 70px;
+}
+
+#newsfeed article {
+    background-color: #f8f9fa;
+    margin-bottom: 30px;
+}
+
+article div {
+    padding: 10px 10px 10px 10px;
+}
+
+.title {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 50px;
+}
+
+.author {
+    padding-left: 10px;
+    font-size: 20px;
+    display: inline-block;
+    float: left;
+}
+
+.data {
+    padding-right: 10px;
+    font-size: 20px;
+    display: inline-block;
+    float: right;
+}
+
+.details {
+    padding-bottom: 30px;
+    clear: both;
+}
+
+.button {
+    color: white;
+    text-decoration: none;
+    background-color: #00669e;
+    padding: 7px 5px 7px 5px;
+    float: right;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.grey {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    color: black;
+}
+
+#sites {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sites div {
+    display: inline-block;
+    width: 300px;
+    margin: 0px 10px 0px 10px;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 30px 100px 30px 100px;
+}
+
+.smallink {
+    color: blue;
+    text-decoration: none;
+
+}
+
+.navleft {
+    float: left;
+    padding: 10px 10px 10px 10px;
+
+}
+
+.navright {
+    float: right;
+    padding: 10px 10px 10px 10px;
+}
+
+.navleft:hover, .navright:hover {
+    color: white;
+}

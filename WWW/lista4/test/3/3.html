@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        Dawid Holewa 317898
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: black;
+        }
+        
+        .smaller {
+            width: 49px;
+            height: 49px;
+            background-color: coral;
+            border: 1px solid black;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            animation: mainAnimation 1s;
+        }
+        
+        .smaller:hover {
+            animation: mainAnimation 1s;
+        }
+        
+        #main {
+            width: 150px;
+            height: 150px;
+            background-color: crimson;
+            position: absolute;
+            margin: 0 auto;
+            top: 70px;
+            left: 270px;
+        }
+        
+        #main:hover {
+            animation: mainAnimation 1s;
+        }
+        
+        #container {
+            margin: 0 auto;
+            width: 655px;
+            height: 355px;
+            border: 1px solid black;
+            position: relative;
+        }
+        
+        #time {
+            width: 300px;
+            margin: 0 auto;
+            color: white;
+            font-size: 80px;
+            background-color: black;
+            text-align: center;
+        }
+        
+        #info {
+            width: 600px;
+            margin: 0 auto;
+            color: white;
+            font-size: 20px;
+            background-color: black;
+            text-align: center;
+        }
+        
+        #scores {
+            color: white;
+            float: right;
+            margin-right: 100px;
+        }
+        
+        #play {
+            background-color: #555555;
+            width: 100px;
+            height: 50px;
+            border: none;
+            text-decoration: none;
+            color: black;
+            border-radius: 25px;
+        }
+        
+        @keyframes mainAnimation {
+            50% {
+                opacity: 60%;
+            }
+            100% {
+                opacity: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="info">Witaj w grze! Zaznacz wszystkie małe kwadraty poprzez najechanie na nie. Wizyta na zielonym kolorze to kara +100. Możesz zatrzymać czas na dużym kwadracie, tak długo jak pozostaniesz na nim myszką. Pomiędzy odwiedzaniem kwadratów musisz zawsze przejść
+        między dużym kwadratem</div>
+    <div id="time">0</div>
+    <br><br>
+    <div id="container">
+        <div id="main" onmouseover="freeze()" onmouseout="startCount()"></div>
+        <div class="smaller" id="s0" onmouseout="point(0)"></div>
+        <div class="smaller" id="s1" onmouseout="point(1)"></div>
+        <div class="smaller" id="s2" onmouseout="point(2)"></div>
+        <div class="smaller" id="s3" onmouseout="point(3)"></div>
+        <div class="smaller" id="s4" onmouseout="point(4)"></div>
+    </div>
+    <button id="play" onclick="playagain()">PLAY AGAIN</button>
+    <div id="scores">
+        <h3>
+            YOUR SCORES
+        </h3>
+        <table>
+            <tr>
+                <th id="sc0">-</th>
+            </tr>
+            <tr>
+                <th id="sc1">-</th>
+            </tr>
+            <tr>
+                <th id="sc2">-</th>
+            </tr>
+        </table>
+        <br>
+    </div>
+
+    <script>
+        class Rectangle {
+            constructor(xx, yy, widthx, heighty) {
+                this.visited = false;
+                this.x = xx
+                this.y = yy
+                this.width = widthx
+                this.height = heighty
+            }
+
+            intersect(r2) {
+                if (!r2 instanceof Rectangle) {
+                    console.error("Error");
+                } else {
+                    var quickCheck = this.x + this.width > r2.x && r2.x + r2.width > this.x && this.y + this.height > r2.y && r2.y + r2.height > this.y
+                    return quickCheck
+                }
+            }
+        }
+
+        function randomInt(min, max) {
+            return min + Math.floor((max - min) * Math.random());
+        }
+
+        //guarantees not overlapping
+        function isSafe(tempRect, rectangles) {
+            for (let j = 0; j < rectangles.length; j++) {
+                if (tempRect.intersect(rectangles[j])) {
+                    return false
+                }
+            }
+            return true
+        }
+        //placing squares on the plane
+        function shuffle() {
+            for (let i = 0; i < smallers.length; i++) {
+                while (true) {
+                    var x = randomInt(0, 600)
+                    var y = randomInt(0, 300)
+                    var tempRect = new Rectangle(x, y, 50, 50)
+                    tempRect.width++;
+                    tempRect.height++;
+                    if (isSafe(tempRect, rectangles) && !mainRect.intersect(tempRect)) {
+                        rectangles.push(tempRect)
+                        break
+                    }
+                    tempRect.width--;
+                    tempRect.height--;
+                }
+                smallers[i].style.top = y + "px"
+                smallers[i].style.left = x + "px"
+            }
+        }
+
+
+        //functions to control timer
+        function timedCount() {
+            document.getElementById("time").innerHTML = c
+            c = c + 1;
+            t = setTimeout(timedCount, 10);
+        }
+
+        function startCount() {
+            if (gameIsOn == false) return
+            if (!timer_is_on) {
+                timer_is_on = 1;
+                timedCount();
+            }
+        }
+
+        function stopCount() {
+            clearTimeout(t);
+            timer_is_on = 0;
+        }
+
+        //function used by the big square
+        function freeze() {
+            stopCount()
+            onebutlast = true;
+        }
+        //used by small squares
+        function point(index) {
+            //providies penalty
+            if (rectangles[index].visited == true) {
+                c += 100
+            }
+            if (rectangles[index].visited == false && onebutlast == true) {
+                rectangles[index].visited = true
+                document.getElementById("s" + index).style.backgroundColor = "yellowgreen"
+            }
+
+            onebutlast = false
+            checkGameOver();
+        }
+
+        function checkGameOver() {
+            if (5 == rectangles.filter(function(x) {
+                    if (x.visited == true) return true;
+                    else return false;
+                }).length) {
+                stopCount();
+                gameIsOn = false
+
+                handleScores()
+
+            }
+        }
+
+        function handleScores() {
+            var aux = document.getElementById("time").childNodes[0].nodeValue
+            if (gameIsOn == false && !(scores.includes(aux)) && aux != "0") {
+                scores.push(aux)
+            }
+
+            var len = scores.length - 1
+            console.log("len" + len)
+            var id = 0
+            console.log("sc" + id)
+            for (var i = len; i >= 0 && i > len - 3; i--) {
+                console.log("i", i)
+                document.getElementById("sc" + id).innerHTML = scores[i]
+                id++
+            }
+        }
+
+        function playagain() {
+            stopCount();
+            c = 0;
+            document.getElementById("time").innerHTML = "0"
+            rectangles.forEach(function(rec) {
+                rec.visited = false
+            })
+            for (var j = 0; j < 5; j++) {
+                document.getElementById("s" + j).style.backgroundColor = "coral"
+            }
+            handleScores()
+            gameIsOn = true
+        }
+
+
+        var smallers = document.getElementsByClassName('smaller')
+        var mainRect = new Rectangle(270, 70, 150, 150)
+
+        var rectangles = []
+        rectangles.push(mainRect)
+
+        shuffle()
+
+
+        var c = 0;
+        var t;
+        var timer_is_on = 0;
+
+        var gameIsOn = true;
+        var scores = []
+            // One But Last: true if the last one mouseovered was the big stone, false otherwise
+        onebutlast = false
+    </script>
+</body>
+
+
+</html>

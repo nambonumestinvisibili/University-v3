@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>
+        Dawid Holewa 317898
+    </title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+        }
+        
+        input {
+            display: block;
+            margin-bottom: 2px;
+            border: 2px solid black;
+            border-radius: 25px;
+        }
+    </style>
+
+    <script>
+        function val(win1, regex) {
+            win1.oninput = function() {
+                val = this.value
+                if (regex.exec(val)) {
+                    this.style.borderColor = "yellowgreen"
+                } else this.style.borderColor = "red"
+                return val
+            }
+        }
+        window.onload = function() {
+            var win1 = document.getElementById('konto')
+            var win2 = document.getElementById('mail')
+            var win3 = document.getElementById('pesel')
+            var win4 = document.getElementById('data')
+
+            var valAcc = new RegExp("^[0-9]{3}$")
+            val(win1, valAcc)
+
+            var valMail = new RegExp("^\\w{3,20}@\\w{3,10}\.\\w{3,5}$")
+            val(win2, valMail)
+
+            var valPes = new RegExp("^[0-9]{11}$")
+            val(win3, valPes)
+
+            // var utc = new Date().toJSON().slice(0,10);
+            var valDate = new RegExp("^\\d{4}-\\d{2}-\\d{2}$")
+            val(win4, valDate)
+
+        }
+    </script>
+</head>
+
+<body>
+    <form id="transaction">
+
+        <label for="konto">Numer konta</label>
+        <input type="text" id="konto" name="konto" placeholder="3 numbers" required />
+
+        <label for="mail">E-mail</label>
+        <input type="text" id="mail" name="mail" placeholder="only nam@example.com" required/>
+
+        <label for="pesel">Pesel</label>
+        <input type="number" id="pesel" required>
+
+        <label for="data">Data przelwu</label>
+        <input type="date" id="data" name="data" required/>
+
+
+        <button type="submit" id="submit" name="submit" onclick="validate()">Wyślij</button>
+    </form>
+</body>
+
+
+</html>
