@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<user userid="1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="userschema.xsd"> 
+<!-- 1. Tells xml thaht the file is to be validated againsta a scgema -->
+<!-- 2. Where the scheme is -->
+
+    <accountnumber>123</accountnumber>
+    <pesel>99031440491</pesel>
+    <birthdaydate>1999-03-14</birthdaydate>
+    <email>dawid@gmail.com</email>
+</user>

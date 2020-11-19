@@ -1,0 +1,15 @@
+#animation {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.point {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 30px;
+    background-color: #EBEAEA;
+    border-radius: 100% 100% 100% 100%;   
+}

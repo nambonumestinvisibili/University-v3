@@ -22,6 +22,17 @@ public class Triangle extends Figure {
         }
     }
 
+    @Override
+    public String toString(){
+        String aux = "[";
+        for (Point p : points) {
+            aux += p.toString();
+            aux += ", ";
+        }
+        aux += "]";
+        return "Triangle of points: " + aux;
+    }
+
 
 
 }

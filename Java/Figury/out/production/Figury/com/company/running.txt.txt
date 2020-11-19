@@ -1,0 +1,7 @@
+
+//no compilation cause of additional packages for 
+//IllegalArgumentException
+
+//in the top level - src.
+
+java -cp . com.company.Main

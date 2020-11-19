@@ -49,7 +49,7 @@ public class Point {
 
     @Override
     public String toString(){
-        return "Point of coordinates (" + this.x + ", " + this.y + ")";
+        return "Point (" + this.x + ", " + this.y + ")";
     }
 
 

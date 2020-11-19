@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<user userid="2"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="userschema.xsd"> 
+    <accountnumber>321</accountnumber>
+    <pesel>99030000333</pesel>
+    <birthdaydate>1700-03-14</birthdaydate>
+    <email>krzysiek@wp.pl</email>
+</user>

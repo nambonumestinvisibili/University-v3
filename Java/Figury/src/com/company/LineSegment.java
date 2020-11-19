@@ -4,7 +4,6 @@ import javax.sound.sampled.Line;
 import java.util.ArrayList;
 
 public class LineSegment extends Figure {
-//    private ArrayList<Point> points;
 
     public LineSegment(Point p1, Point p2) {
         super();

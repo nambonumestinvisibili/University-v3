@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dawid Holewa - 317898</title>
+
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        label,
+        input {
+            display: block;
+        }
+
+        #usersContainer table thead {
+            background-color: black;
+            color: grey;
+        }
+
+        #usersContainer table tbody td {
+            border: 1px solid gray;
+        }
+
+        form {
+            width: 200px;
+            border: 5px solid grey;
+            border-radius: 25px;
+        }
+
+        fieldset {
+            border: none;
+        }
+
+        .ui-datepicker {
+            background-color: gray;
+            display: block;
+            text-decoration: none;
+        }
+
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+
+    <div id="usersContainer">
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>City</th>
+                    <th>Postal code</th>
+                    <th>Date of birth</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="row1">
+                    <td>Dawid</td>
+                    <td>Holewa</td>
+                    <td>Trzebiechów</td>
+                    <td>66-132</td>
+                    <td>14-03-1999</td>
+                    <td>
+                        <button id="del1" class='delete'>delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button id="create-user">Create new user</button>
+        
+        <div id="dialog-confirm" title="Are you sure?">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will
+                be permanently deleted and cannot be recovered. Are you sure?</p>
+        </div>
+    
+    </div>
+
+    <div id="form">
+        <form>
+            <fieldset>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Jane"
+                    class="text ui-widget-content ui-corner-all">
+
+                <label for="surname">Surname</label>
+                <input type="text" name="surname" id="surname" placeholder="Smith"
+                    class="text ui-widget-content ui-corner-all">
+
+                <label for="city">City</label>
+                <input type="text" name="city" id="city" placeholder="New York"
+                    class="text ui-widget-content ui-corner-all">
+
+                <label for="post">Postal Code</label>
+                <input type="text" name="post" id="post" placeholder="xx-xxx"
+                    class="text ui-widget-content ui-corner-all">
+
+                <label for="birthday">Date of birth</label>
+                <input type="text" name="birthday" id="birthday">
+                <div id="datepicker"></div>
+            </fieldset>
+        </form>
+    </div>
+
+    <script>
+
+        $(function () {
+            var dialog, form;
+
+            $("#birthday").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+            function addUser() {
+                var valid = true
+                var x = $('#users-table > * > tr').length;
+                $("#usersContainer tbody").append(
+                    "<tr id='row" + x + "'>" +
+                    "<td>" + $("#name").val() + "</td>" +
+                    "<td>" + $("#surname").val() + "</td>" +
+                    "<td>" + $("#city").val() + "</td>" +
+                    "<td>" + $("#post").val() + "</td>" +
+                    "<td>" + $("#birthday").val() + "</td>" +
+                    "<td>" + '<button id="del' + x +
+                    '" class="delete ui-button ui-corner-all ui-widget">delete</button>' +
+                    "</td>" + "</tr>")
+                dialog.dialog("close");
+                return valid;
+            }
+
+            dialog = $("#form").dialog({
+                autoOpen: false,
+                height: 400,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Create new account": addUser,
+                },
+                close: function () {
+                    form[0].reset(); //czysci form
+                    dialog.dialog("close")
+                }
+            })
+
+            $("#create-user").button().on("click", function () {
+                dialog.dialog("open")
+            });
+
+
+            var confirmation = $("#dialog-confirm").dialog({
+                autoOpen: false,
+                dialognumero: -1,
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                buttons: {
+                    "Delete the row": function () {
+                        $(this).dialog("option", "choice", true);
+                        $(this).dialog("close");
+                        var num = $(this).dialog("option", "dialognumero");
+                        deleteRow(num)
+                    }
+                }
+            });
+
+            function deleteRow(num) {
+                var idd = "#row" + num
+                var todel = $(idd)
+                todel.remove()
+            };
+
+
+            $(document).on('DOMNodeInserted', function (e) { //trzeba przenumerowac rows
+                deletes = $(".delete");
+                deleteFunctionEnabled(deletes);
+            });
+
+            deleteFunctionEnabled($(".delete"));
+       
+            function deleteFunctionEnabled(deleteButtonsCollection) {
+                var deletes = deleteButtonsCollection;
+                for (let i = 0; i < deletes.length; i++) {
+                    deletes[i].addEventListener("click", function () {
+                        var j = i + 1;
+                        confirmation.dialog("option", "dialognumero", j)
+                        confirmation.dialog("open")
+                    }, false);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

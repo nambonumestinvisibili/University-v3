@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "users.json",
+    "title": "User",
+    "description": "A user",
+    "type": "object",
+    "properties": {
+        "userId": {
+            "type": "integer"
+        },
+        "accountNumber": {
+            "type":"integer",
+            "minimum": 100,
+            "maximum": 999
+        },
+        "pesel": {
+            "type": "integer",
+            "minimum": 10000000000,
+            "maximum": 99999999999
+        },
+        "birthdayDate": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "email": {
+            "type": "string",
+            "pattern": "^[A-Za-z]*@[a-z]*.com$"
+        }
+    },
+    "required": ["userId", "accountNumber", "pesel", "birthdayDate", "email"]
+}
