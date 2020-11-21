@@ -1,0 +1,77 @@
+Every open port on your computer is an entry point that can be exploited to gain covert access. So if you need to know what connections a machine has to the internet and what services may be open and running, Netstat can quickly tell you.
+
+
+nslookup itcourses.eu := 79.96.11.200
+
+#1
+(netstat -an) -->
+                    Local                   Foreign
+tcp        0      0 192.168.1.28:56714      79.96.11.200:80         ESTABLISHED
+
+            port źródłowy 56714
+
+
+#2
+zmierzenie czasu
+time curl '79.96.11.200:80'
+-->
+real	0m0,055s
+user	0m0,004s
+sys	0m0,014s
+
+
+#3
+lokalizacja serwera itcourses.eu:
+LOCATION
+
+Country
+Poland (PL)
+Continent
+Europe (EU)
+Coordinates
+52.2394 (lat) / 21.0362 (long)
+Time
+2020-11-17 22:02:41 (Europe/Warsaw)
+NETWORK
+
+IP address
+79.96.11.200
+Hostname
+cloudserver053794.home.pl
+Provider
+home.pl S.A.
+ASN
+12824
+
+
+#4
+azure ip addres of practisewebsite.azurewebsites.net := 20.50.2.18
+LOCATION
+
+City
+Amsterdam
+Region
+North Holland (NH)
+Postal code
+1012
+Country
+Netherlands (NL)
+Continent
+Europe (EU)
+Coordinates
+52.3759 (lat) / 4.8975 (long)
+Time
+2020-11-17 22:17:47 (Europe/Amsterdam)
+NETWORK
+
+IP address
+20.50.2.18
+Hostname
+20.50.2.18
+Provider
+MICROSOFT-CORP-MSN-AS-BLOCK
+ASN
+8075
+
+
+( i chose western europe, this says europe)

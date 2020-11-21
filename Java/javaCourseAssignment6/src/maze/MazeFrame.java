@@ -9,18 +9,16 @@ public class MazeFrame extends Frame {
 
     public Maze maze;
 
-    private WindowListener closeAndResize = new WindowAdapter() {
-        public void windowClosing(WindowEvent ev) {
-            MazeFrame.this.dispose();
-        }
-    };
-
-    public MazeFrame() {
-//        super("aMAZEing");
+    public MazeFrame(){
         super();
-        maze = new Maze(14, 14);
-        setSize(650, 650);
-        addWindowListener(closeAndResize);
+        maze = new Maze(15, 15);
+        setSize(600, 600);
+        WindowListener close = new WindowAdapter() {
+            public void windowClosing(WindowEvent e){
+                MazeFrame.this.dispose();
+            }
+        };
+        addWindowListener(close);
         add(maze);
         setVisible(true);
     }

@@ -3,6 +3,6 @@ package maze;
 public class Main {
 
     public static void main(String[] args) {
-        MazeFrame newGame = new MazeFrame();
+        MazeFrame game = new MazeFrame();
     }
 }

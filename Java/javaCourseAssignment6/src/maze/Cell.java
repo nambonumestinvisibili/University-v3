@@ -4,116 +4,113 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Cell {
-    private boolean visited = false;
 
-    private Cell upNeighbour = null;
-    private Cell downNeighbour = null;
-    private Cell rightNeighbour = null;
-    private Cell leftNeighbour = null;
+    private boolean visited;
 
-    private boolean upWall = true;
-    private boolean downWall = true;
-    private boolean rightWall = true;
-    private boolean leftWall = true;
+    private boolean upWall;
+    private boolean downWall;
+    private boolean rightWall;
+    private boolean leftWall;
 
-    public ArrayList<Cell> directNeighbours = new ArrayList<>();
+    private Cell upNbour;
+    private Cell downNbour;
+    private Cell rightNbour;
+    private Cell leftNbour;
 
+    private ArrayList<Cell> directNbours;
 
-
-    public void markAsVisited() {
-        visited = true;
+    public Cell(){
+        visited = false;
+        upNbour = null;
+        downNbour = null;
+        leftNbour = null;
+        rightNbour = null;
+        upWall = true;
+        downWall = true;
+        rightWall = true;
+        leftWall = true;
+        directNbours = new ArrayList<>();
     }
 
-    public boolean isVisited() {
+    public void setVisitedTrue() {visited = true;}
+
+    public boolean isVisited(){
         return visited;
     }
 
-    //begin getters and setters
-
-    public void setUpNeighbour(Cell c) {
-        upNeighbour = c;
+    public void fillDirectNboursWithShuffledNbours(){
+        if (upNbour != null) directNbours.add(upNbour);
+        if (downNbour != null) directNbours.add(downNbour);
+        if (leftNbour != null) directNbours.add(leftNbour);
+        if (rightNbour != null) directNbours.add(rightNbour);
+        Collections.shuffle(directNbours);
     }
 
-    public Cell getUpNeighbour() {
-        return upNeighbour;
+    public ArrayList<Cell> getDirectNbours(){
+        return directNbours;
     }
 
-    public void setDownNeighbour(Cell c) {
-        downNeighbour = c;
+    public Cell getUpNbour() {
+        return upNbour;
     }
 
-    public Cell getDownNeighbour() {
-        return downNeighbour;
+    public void setUpNbour(Cell upNbour) {
+        this.upNbour = upNbour;
     }
 
-    public void setRightNeighbour(Cell c) {
-        rightNeighbour = c;
+    public Cell getDownNbour() {
+        return downNbour;
     }
 
-    public Cell getRightNeighbour() {
-        return rightNeighbour;
+    public void setDownNbour(Cell downNbour) {
+        this.downNbour = downNbour;
     }
 
-    public void setLeftNeighbour(Cell c) {
-        leftNeighbour = c;
+    public Cell getRightNbour() {
+        return rightNbour;
     }
 
-    public Cell getLeftNeighbour() {
-        return leftNeighbour;
+    public void setRightNbour(Cell rightNbour) {
+        this.rightNbour = rightNbour;
     }
 
-    // end
+    public Cell getLeftNbour() {
+        return leftNbour;
+    }
 
-    public void deleteNorthernWall() {
+    public void setLeftNbour(Cell leftNbour) {
+        this.leftNbour = leftNbour;
+    }
+
+    public void deleteUpWall() {
         upWall = false;
     }
 
-    public void deleteSouthernWall() {
+    public void deleteDownWall() {
         downWall = false;
     }
 
-    public void deleteEasternWall() {
+    public void deleteRightWall() {
         rightWall = false;
     }
 
-    public void deleteWesternWall() {
+    public void deleteLeftWall() {
         leftWall = false;
     }
 
-
-    public boolean hasNorthernWall() {
+    public boolean hasUpWall() {
         return upWall;
     }
 
-    public boolean hasSouthernWall() {
+    public boolean hasDownWall() {
         return downWall;
     }
 
-    public boolean hasEasternWall() {
+    public boolean hasRightWall() {
         return rightWall;
     }
 
-    public boolean hasWesternWall() {
+    public boolean hasLeftWall() {
         return leftWall;
-    }
-
-    private void shuffleDirectNeighbours() {
-        Collections.shuffle(directNeighbours);
-    }
-
-    public void setDirectNeighbours() {
-        if (upNeighbour != null) {
-            directNeighbours.add(upNeighbour);
-        }
-        if (downNeighbour != null) {
-            directNeighbours.add(downNeighbour);
-        }
-        if (rightNeighbour != null) {
-            directNeighbours.add(rightNeighbour);
-        }
-        if (leftNeighbour != null) {
-            directNeighbours.add(leftNeighbour);
-        }
-        shuffleDirectNeighbours();
     }
 }

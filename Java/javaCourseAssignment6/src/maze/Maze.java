@@ -6,197 +6,192 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 
 public class Maze extends Canvas implements KeyListener {
-    private int numOfClicks;
-    private int mHeight;
-    private int mWidth;
-    private int cellSize = 30;
+
+
+    private int height;
+    private int width;
+    private int cellSize;
+    private Hero hero;
     private Cell[][] maze;
-    private Cell start, finish;
-    private Random rand = new Random();
+    private Cell start;
+    private Cell finish;
+    private boolean gameFinished;
 
-    private Explorator explorator;
-    private boolean gameWon = false;
+    public Maze(int width, int height){
+        this.height = height;
+        this.width = width;
+        this.maze = new Cell[height][width];
+        this.cellSize = 30;
 
-    public Maze(int height, int width) {
-        mHeight = height;
-        mWidth = width;
-        this.maze = new Cell[mHeight][mWidth];
-        numOfClicks = 0;
-
-        setSize(cellSize*mWidth, cellSize*mHeight);
+        setSize(cellSize * width, cellSize * height);
         addKeyListener(this);
 
         initializeMaze();
 
-        int startX = rand.nextInt(mHeight), startY = rand.nextInt(mWidth);
+        Random random = new Random();
+        int startx = random.nextInt(height);
+        int starty = random.nextInt(width);
 
-        start = maze[startX][startY];
-        start.markAsVisited();
-        finish = maze[0][mWidth - 1];
+        start = maze[startx][starty];
+        start.setVisitedTrue();
 
-        explorator = new Explorator(startY, startX, maze);
+        finish = maze[0][width-1];
+
+        hero = new Hero(starty, startx);
 
         generateMaze(start);
     }
 
     private void initializeMaze() {
-        for (int i = 0; i < mHeight; i++) {
-            for (int j = 0; j < mWidth; j++) {
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < width; j++){
                 maze[i][j] = new Cell();
             }
         }
-        for (int i = 0; i < mHeight; i++) {
-            for (int j = 0; j < mWidth; j++) {
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 // position of neighbours depending on current cell position
                 if (i == 0 && j == 0) {
                     //top left
-                    maze[i][j].setDownNeighbour(maze[i + 1][j]);
-                    maze[i][j].setRightNeighbour(maze[i][j + 1]);
+                    maze[i][j].setDownNbour(maze[i + 1][j]);
+                    maze[i][j].setRightNbour(maze[i][j + 1]);
 
-                } else if (i == mHeight - 1 && j == 0) {
+                } else if (i == height-1 && j == 0) {
                     //bottom left
-                    maze[i][j].setUpNeighbour(maze[i - 1][j]);
-                    maze[i][j].setRightNeighbour(maze[i][j + 1]);
-                } else if (i == 0 && j == mWidth - 1) {
+                    maze[i][j].setUpNbour(maze[i - 1][j]);
+                    maze[i][j].setRightNbour(maze[i][j + 1]);
+                } else if (i == 0 && j == width - 1) {
                     //top right
-                    maze[i][j].setDownNeighbour(maze[i + 1][j]);
-                    maze[i][j].setLeftNeighbour(maze[i][j - 1]);
-                } else if (i == mHeight - 1 && j == mWidth - 1) {
+                    maze[i][j].setDownNbour(maze[i + 1][j]);
+                    maze[i][j].setLeftNbour(maze[i][j - 1]);
+                } else if (i == height - 1 && j == width - 1) {
                     //bottom right
-                    maze[i][j].setUpNeighbour(maze[i - 1][j]);
-                    maze[i][j].setLeftNeighbour(maze[i][j - 1]);
-                } else if (i == 0 && j > 0 && j < mWidth - 1) {
+                    maze[i][j].setUpNbour(maze[i - 1][j]);
+                    maze[i][j].setLeftNbour(maze[i][j - 1]);
+                } else if (i == 0 && j > 0 && j < width - 1) {
                     //very top row
-                    maze[i][j].setDownNeighbour(maze[i + 1][j]);
-                    maze[i][j].setRightNeighbour(maze[i][j + 1]);
-                    maze[i][j].setLeftNeighbour(maze[i][j - 1]);
-                } else if (i == mHeight - 1 && j > 0 && j < mWidth - 1) {
+                    maze[i][j].setDownNbour(maze[i + 1][j]);
+                    maze[i][j].setRightNbour(maze[i][j + 1]);
+                    maze[i][j].setLeftNbour(maze[i][j - 1]);
+                } else if (i == height - 1 && j > 0 && j < width - 1) {
                     //very bottom row
-                    maze[i][j].setUpNeighbour(maze[i - 1][j]);
-                    maze[i][j].setRightNeighbour(maze[i][j + 1]);
-                    maze[i][j].setLeftNeighbour(maze[i][j - 1]);
-                } else if (i > 0 && i < mHeight - 1 && j == 0) {
+                    maze[i][j].setUpNbour(maze[i - 1][j]);
+                    maze[i][j].setRightNbour(maze[i][j + 1]);
+                    maze[i][j].setLeftNbour(maze[i][j - 1]);
+                } else if (i > 0 && i < height - 1 && j == 0) {
                     //very left col
-                    maze[i][j].setUpNeighbour(maze[i - 1][j]);
-                    maze[i][j].setDownNeighbour(maze[i + 1][j]);
-                    maze[i][j].setRightNeighbour(maze[i][j + 1]);
-                } else if (i > 0 && i < mHeight - 1 && j == mWidth - 1) {
+                    maze[i][j].setUpNbour(maze[i - 1][j]);
+                    maze[i][j].setDownNbour(maze[i + 1][j]);
+                    maze[i][j].setRightNbour(maze[i][j + 1]);
+                } else if (i > 0 && i < height - 1 && j == width - 1) {
                     //very right col
-                    maze[i][j].setUpNeighbour(maze[i - 1][j]);
-                    maze[i][j].setDownNeighbour(maze[i + 1][j]);
-                    maze[i][j].setLeftNeighbour(maze[i][j - 1]);
+                    maze[i][j].setUpNbour(maze[i - 1][j]);
+                    maze[i][j].setDownNbour(maze[i + 1][j]);
+                    maze[i][j].setLeftNbour(maze[i][j - 1]);
                 } else {
-                    maze[i][j].setUpNeighbour(maze[i - 1][j]);
-                    maze[i][j].setDownNeighbour(maze[i + 1][j]);
-                    maze[i][j].setRightNeighbour(maze[i][j + 1]);
-                    maze[i][j].setLeftNeighbour(maze[i][j - 1]);
+                    maze[i][j].setUpNbour(maze[i - 1][j]);
+                    maze[i][j].setDownNbour(maze[i + 1][j]);
+                    maze[i][j].setRightNbour(maze[i][j + 1]);
+                    maze[i][j].setLeftNbour(maze[i][j - 1]);
                 }
-                maze[i][j].setDirectNeighbours();
+                maze[i][j].fillDirectNboursWithShuffledNbours();
             }
         }
     }
 
     private void generateMaze(Cell start) {
-        for (Cell current : start.directNeighbours) {
-            if (!current.isVisited()) {
-                current.markAsVisited();
-                if (current == start.getUpNeighbour()) {
-                    start.deleteNorthernWall();
-                    current.deleteSouthernWall();
-                } else if (current == start.getDownNeighbour()) {
-                    start.deleteSouthernWall();
-                    current.deleteNorthernWall();
-                } else if (current == start.getRightNeighbour()) {
-                    start.deleteEasternWall();
-                    current.deleteWesternWall();
-                } else if (current == start.getLeftNeighbour()) {
-                    start.deleteWesternWall();
-                    current.deleteEasternWall();
+        for (Cell cell : start.getDirectNbours()){
+            if (cell.isVisited() == false){
+                cell.setVisitedTrue();
+                if (cell == start.getUpNbour()){
+                    start.deleteUpWall();
+                    cell.deleteDownWall();
                 }
-                generateMaze(current);
+                else if (cell == start.getDownNbour()){
+                    start.deleteDownWall();
+                    cell.deleteUpWall();
+                }
+                else if (cell == start.getRightNbour()){
+                    start.deleteRightWall();
+                    cell.deleteLeftWall();
+                }
+                else if (cell == start.getLeftNbour()){
+                    start.deleteLeftWall();
+                    cell.deleteRightWall();
+                }
+                generateMaze(cell);
             }
         }
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g){
         Graphics2D graphics2D = (Graphics2D) g;
-        drawEverything(graphics2D);
-        //paintMaze(g);
-        //g.drawImage(explorator.getImg(), explorator.getX() * cellSize, explorator.getY() * cellSize, this);
-    }
-
-    private void drawEverything(Graphics g) {
-        Graphics2D graphics2D = (Graphics2D) g;
-        paintMaze(graphics2D);
-        graphics2D.drawImage(explorator.getImg(), cellSize * explorator.getX(), cellSize * explorator.getY(), null);
+        paintMaze(g);
+        graphics2D.drawImage(hero.getImg(), cellSize * hero.getX(),
+                cellSize * hero.getY(), null);
     }
 
     private void paintMaze(Graphics g) {
-        for (int i = 0; i < mHeight; i++) {
-            for (int j = 0; j < mWidth; j++) {
-                if (maze[i][j] == start) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+//                if (maze[i][j] == start) {
+//                    g.setColor(Color.GREEN);
+//                    g.fillRect(j * 30, i * 30, 30, 30);
+//                    g.setColor(Color.BLACK);
+//                }
+                if (maze[i][j] == finish) {
                     g.setColor(Color.GREEN);
                     g.fillRect(j * 30, i * 30, 30, 30);
                     g.setColor(Color.BLACK);
                 }
-                if (maze[i][j] == finish) {
-                    g.setColor(Color.RED);
-                    g.fillRect(j * 30, i * 30, 30, 30);
-                    g.setColor(Color.BLACK);
-                }
-                if (maze[i][j].hasNorthernWall()) {
+                if (maze[i][j].hasUpWall()) {
                     g.drawLine(j * 30, i * 30, j * 30 + 30, i * 30);
                 }
-                if (maze[i][j].hasSouthernWall()) {
+                if (maze[i][j].hasDownWall()) {
                     g.drawLine(j * 30, i * 30 + 30, j * 30 + 30, i * 30 + 30);
                 }
-                if (maze[i][j].hasEasternWall()) {
+                if (maze[i][j].hasRightWall()) {
                     g.drawLine(j * 30 + 30, i * 30, j * 30 + 30, i * 30 + 30);
                 }
-                if (maze[i][j].hasWesternWall()) {
+                if (maze[i][j].hasLeftWall()) {
                     g.drawLine(j * 30, i * 30, j * 30, i * 30 + 30);
                 }
             }
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyTyped(KeyEvent keyEvent) {    }
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        if (gameFinished) return;
 
-        numOfClicks++;
+        int keyCode = keyEvent.getKeyCode();
 
-        if (gameWon) return;
+        Cell heroCell = maze[hero.getY()][hero.getX()];
 
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_UP && !maze[explorator.getY()][explorator.getX()].hasNorthernWall()) {
-            explorator.setY((explorator.getY() - 1));
+        if (keyCode == KeyEvent.VK_UP && !heroCell.hasUpWall()) {
+            hero.moveUp();
         }
-        if (key == KeyEvent.VK_DOWN && !maze[explorator.getY()][explorator.getX()].hasSouthernWall()) {
-            explorator.setY((explorator.getY() + 1));
+        if (keyCode == KeyEvent.VK_DOWN && !heroCell.hasDownWall()) {
+            hero.moveDown();
         }
-        if (key == KeyEvent.VK_LEFT && !maze[explorator.getY()][explorator.getX()].hasWesternWall()) {
-            explorator.setX((explorator.getX() - 1));
+        if (keyCode == KeyEvent.VK_LEFT && !heroCell.hasLeftWall()) {
+            hero.moveLeft();
         }
-        if (key == KeyEvent.VK_RIGHT && !maze[explorator.getY()][explorator.getX()].hasEasternWall()) {
-            explorator.setX((explorator.getX() + 1));
+        if (keyCode == KeyEvent.VK_RIGHT && !heroCell.hasRightWall()) {
+            hero.moveRight();
         }
 
         repaint();
 
-        if (explorator.getY() * 30 == 0 && explorator.getX() == mWidth-1) {
-            gameWon = true;
-            System.out.println("Congratulations, You've made it in " + numOfClicks + " clicks!");
+        if (hero.getY() * 30 == 0 && hero.getX() == width-1) {
+            gameFinished = true;
+            System.out.println("You've won!");
         }
     }
-
     @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
+    public void keyReleased(KeyEvent keyEvent) {    }
 }
