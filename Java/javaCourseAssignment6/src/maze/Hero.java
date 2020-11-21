@@ -10,10 +10,12 @@ public class Hero {
     private int y;
     private String imageFilename = "C:\\Users\\dvwid\\Documents\\University-v3\\Java\\javaCourseAssignment6\\src\\images\\minion.png";
     private Image img;
+    private int cellSize;
 
-    public Hero(int x, int y){
+    public Hero(int x, int y, int cellSize){
         this.x = x;
         this.y = y;
+        this.cellSize = cellSize;
 
         try {
             img = ImageIO.read(new File(imageFilename));
@@ -38,14 +40,11 @@ public class Hero {
         x += 1;
     }
 
-    public void paintHero(Graphics g, int cellSize){
+    public void paintHero(Graphics g){
         Graphics2D graphics2D = (Graphics2D)g;
         graphics2D.drawImage(getImg(), (cellSize) * getX(),
                 (cellSize) * getY(), null);
     }
-
-
-
 
     public int getX() {
         return x;

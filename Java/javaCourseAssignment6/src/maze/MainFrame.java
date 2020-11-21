@@ -7,11 +7,13 @@ import java.awt.event.WindowListener;
 
 public class MainFrame extends Frame {
 
-    public Maze maze;
+    GamePanel gamePanel;
 
     public MainFrame(){
         super();
-        maze = new Maze(10, 10, this);
+        int mazeSize = 10;
+        gamePanel = new GamePanel( this, mazeSize, mazeSize);
+
         setSize(600, 600);
         WindowListener close = new WindowAdapter() {
             public void windowClosing(WindowEvent e){
@@ -19,7 +21,7 @@ public class MainFrame extends Frame {
             }
         };
         addWindowListener(close);
-        add(maze);
+        add(gamePanel);
         setVisible(true);
     }
 }

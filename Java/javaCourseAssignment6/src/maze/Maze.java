@@ -5,41 +5,30 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
-public class Maze extends Canvas implements KeyListener {
+public class Maze {
 
 
     private final int height;
     private final int width;
     private final int cellSize;
-    private final Hero hero;
     private final Cell[][] maze;
     private Cell start;
     private Cell finish;
-    private boolean gameFinished;
-    private final MainFrame mainFrame;
 
-    public Maze(int width, int height, MainFrame mainFrame){
+
+    public Maze(int width, int height, int startx, int starty, int cellSize){
         this.height = height;
         this.width = width;
         this.maze = new Cell[height][width];
-        this.cellSize = 30;
-        this.mainFrame = mainFrame;
-
-        setSize(cellSize * width, cellSize * height);
-        addKeyListener(this);
+        this.cellSize = cellSize;
 
         initializeMaze();
-
-        Random random = new Random();
-        int startx = random.nextInt(height);
-        int starty = random.nextInt(width);
 
         start = maze[startx][starty];
         start.setVisitedTrue();
 
         finish = maze[0][width-1];
 
-        hero = new Hero(starty, startx);
 
         generateMaze(start);
     }
@@ -127,13 +116,11 @@ public class Maze extends Canvas implements KeyListener {
         }
     }
 
-    public void paint(Graphics g){
-        Graphics2D graphics2D = (Graphics2D) g;
-        paintMaze(graphics2D);
-        hero.paintHero(graphics2D, cellSize);
+    public Cell getCell (int x, int y){
+            return maze[x][y];
     }
 
-    private void paintMaze(Graphics g) {
+    public void paintMaze(Graphics g) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (maze[i][j] == finish) {
@@ -157,48 +144,7 @@ public class Maze extends Canvas implements KeyListener {
         }
     }
 
-    private boolean shouldGameFinish(){
-        return hero.getY() * 30 == 0 && hero.getX() == width-1;
-    }
-
-    private void tryGameOver(){
-        if (shouldGameFinish()) {
-            gameFinished = true;
-
-            System.out.println("You've won!");
-
-            mainFrame.dispose();
-        }
-    }
 
 
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {    }
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-        if (gameFinished) return;
 
-        int keyCode = keyEvent.getKeyCode();
-
-        Cell heroCell = maze[hero.getY()][hero.getX()];
-
-        if (keyCode == KeyEvent.VK_UP && !heroCell.hasUpWall()) {
-            hero.moveUp();
-        }
-        if (keyCode == KeyEvent.VK_DOWN && !heroCell.hasDownWall()) {
-            hero.moveDown();
-        }
-        if (keyCode == KeyEvent.VK_LEFT && !heroCell.hasLeftWall()) {
-            hero.moveLeft();
-        }
-        if (keyCode == KeyEvent.VK_RIGHT && !heroCell.hasRightWall()) {
-            hero.moveRight();
-        }
-
-        repaint();
-
-        tryGameOver();
-    }
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {    }
 }
