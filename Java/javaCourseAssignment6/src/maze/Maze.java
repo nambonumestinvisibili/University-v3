@@ -8,20 +8,22 @@ import java.util.Random;
 public class Maze extends Canvas implements KeyListener {
 
 
-    private int height;
-    private int width;
-    private int cellSize;
-    private Hero hero;
-    private Cell[][] maze;
+    private final int height;
+    private final int width;
+    private final int cellSize;
+    private final Hero hero;
+    private final Cell[][] maze;
     private Cell start;
     private Cell finish;
     private boolean gameFinished;
+    private final MainFrame mainFrame;
 
-    public Maze(int width, int height){
+    public Maze(int width, int height, MainFrame mainFrame){
         this.height = height;
         this.width = width;
         this.maze = new Cell[height][width];
         this.cellSize = 30;
+        this.mainFrame = mainFrame;
 
         setSize(cellSize * width, cellSize * height);
         addKeyListener(this);
@@ -127,19 +129,13 @@ public class Maze extends Canvas implements KeyListener {
 
     public void paint(Graphics g){
         Graphics2D graphics2D = (Graphics2D) g;
-        paintMaze(g);
-        graphics2D.drawImage(hero.getImg(), cellSize * hero.getX(),
-                cellSize * hero.getY(), null);
+        paintMaze(graphics2D);
+        hero.paintHero(graphics2D, cellSize);
     }
 
     private void paintMaze(Graphics g) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-//                if (maze[i][j] == start) {
-//                    g.setColor(Color.GREEN);
-//                    g.fillRect(j * 30, i * 30, 30, 30);
-//                    g.setColor(Color.BLACK);
-//                }
                 if (maze[i][j] == finish) {
                     g.setColor(Color.GREEN);
                     g.fillRect(j * 30, i * 30, 30, 30);
@@ -158,6 +154,20 @@ public class Maze extends Canvas implements KeyListener {
                     g.drawLine(j * 30, i * 30, j * 30, i * 30 + 30);
                 }
             }
+        }
+    }
+
+    private boolean shouldGameFinish(){
+        return hero.getY() * 30 == 0 && hero.getX() == width-1;
+    }
+
+    private void tryGameOver(){
+        if (shouldGameFinish()) {
+            gameFinished = true;
+
+            System.out.println("You've won!");
+
+            mainFrame.dispose();
         }
     }
 
@@ -187,10 +197,7 @@ public class Maze extends Canvas implements KeyListener {
 
         repaint();
 
-        if (hero.getY() * 30 == 0 && hero.getX() == width-1) {
-            gameFinished = true;
-            System.out.println("You've won!");
-        }
+        tryGameOver();
     }
     @Override
     public void keyReleased(KeyEvent keyEvent) {    }

@@ -38,6 +38,12 @@ public class Hero {
         x += 1;
     }
 
+    public void paintHero(Graphics g, int cellSize){
+        Graphics2D graphics2D = (Graphics2D)g;
+        graphics2D.drawImage(getImg(), (cellSize) * getX(),
+                (cellSize) * getY(), null);
+    }
+
 
 
 
