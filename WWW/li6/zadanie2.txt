@@ -1,0 +1,46 @@
+cd ~/etc
+sudo gedit hosts
+
+The hosts file performs a name to IP address mapping and was used on early computer networks for
+ name resolution before DNS was developed.
+
+a way of aliasing the IPs of those servers, so instead of typing the number out, one could simply type proxy, 
+for example.
+
+The syntax is basic, and consists of the IP to be aliased, then the name that you would like to alias it with
+128.243.253.119 proxy
+
+As it happens, this is actually a surprisingly effective method of blocking malicious websites, 
+and even adverts. Quite simply, any domain that you would not like your browser to access, 
+can be added to the hosts file with an IP of 127.0.0.1. 
+This is the IP address for the local machine you are currently working on.
+
+
+jak to rozumiem:
+plik hosts mapuje adres ip na jakiś alias
+
+możemy wpisac pawel.ii.uni.wroc.pl i wyrzuci nas na 127.....
+
+zastosowanie:
+jak nie chcemy wchodzić na jakąś stronę, (albo powstrzymać kogoś kto używa naszego konta przed wejściem na nią), albo zablokować przypadkowe wejście na stronę, 
+zmapujmy nazwę strony na jakiś adres (127.... to mój jest adres, mojego komputera)
+w ten sposob zamiast wejsc na faktyczny adres, wchodzimy na siebie, ergo nie wejdziemy na niechcianą stronę
+
+
+hosts overriduje normalny adres
+
+127.0.0.1. This is the IP address for the local machine you are currently working on
+
+--- how to make internet not suck
+https://someonewhocares.org/hosts/
+ Use this file to prevent your computer from connecting to selected
+# internet hosts. This is an easy and effective way to protect you from 
+# many types of spyware, reduces bandwidth use, blocks certain pop-up 
+# traps, prevents user tracking by way of "web bugs" embedded in spam,
+# provides partial protection to IE from certain web-based exploits and
+# blocks most advertising you would otherwise be subjected to on the 
+# internet. 
+---
+
+79.96.11.200 jakis serwer w wawie - strona w przygotowaniu
+156.17.4.11 strona ii

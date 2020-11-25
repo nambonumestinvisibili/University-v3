@@ -1,0 +1,7 @@
+The Content-Length header is a number denoting an the exact byte length of the HTTP body. T
+he HTTP body starts immediately after the first empty line that is found after the start-line and headers.
+
+Generally the Content-Length header is used for HTTP 1.1 so that the receiving party knows when the
+ current response* has 
+
+tablica request ma zmienną z posta w przypadku takich samych nazw w get i post

@@ -1,0 +1,32 @@
+Name:	ii.uni.wroc.pl
+Address: 156.17.4.11
+
+Name:	www.uj.edu.pl
+Address: 149.156.169.67
+
+
+A mail exchanger record (MX record) specifies the mail server responsible for accepting email messages on behalf of a domain name. It is a resource record in the Domain Name System (DNS). It is possible to configure several MX records, typically pointing to an array of mail servers for load balancing and redundancy.
+
+
+nslookup
+>set type=mx 
+> www.uj.edu.pl
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+www.uj.edu.pl	mail exchanger = 0 mailin1b.srv.uj.edu.pl.
+www.uj.edu.pl	mail exchanger = 0 mailin1a.srv.uj.edu.pl
+
+> www.ii.uni.wroc.pl
+Server:		127.0.0.53
+Address:	127.0.0.53#53
+
+Non-authoritative answer:
+www.ii.uni.wroc.pl	canonical name = ii.uni.wroc.pl.
+ii.uni.wroc.pl	mail exchanger = 5 ALT1.ASPMX.L.GOOGLE.COM.
+ii.uni.wroc.pl	mail exchanger = 1 ASPMX.L.GOOGLE.COM.
+ii.uni.wroc.pl	mail exchanger = 10 ASPMX2.GOOGLEMAIL.COM.
+ii.uni.wroc.pl	mail exchanger = 10 ASPMX3.GOOGLEMAIL.COM.
+ii.uni.wroc.pl	mail exchanger = 5 ALT2.ASPMX.L.GOOGLE.COM.
+
