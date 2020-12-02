@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Hero {
     private int x;
     private int y;
-    private String imageFilename = "C:\\Users\\dvwid\\Documents\\University-v3\\Java\\javaCourseAssignment6\\src\\images\\minion.png";
+    private String imageFilename = "C:\\Users\\dvwid\\Documents\\University-v3\\Java\\javaCourseAssignment6\\src\\images\\hero.png";
     private Image img;
     private int cellSize;
 

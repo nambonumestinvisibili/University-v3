@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "List of transfers";
+    Layout = "~/Views/Shared/_Task3LayoutSideBar.cshtml";
+}
+
+
+<div class="container bg-primary text-white">
+
+    @ViewData["Info"]
+    <ul>
+        <li>data przelewu  @ViewData["Date"] </li>
+        <li>kwota przelewu @ViewData["Cash"] </li>
+    </ul>
+
+</div>

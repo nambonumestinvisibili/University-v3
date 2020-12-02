@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Person>
+
+<h2>User ranking</h2>
+
+<table class="table table-dark">
+    
+        <tr>
+            <th>Miejsce</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Liczba punktów</th>
+            <th>Miasto</th>
+            <th>Drużyna</th>
+        </tr>
+        @{ 
+            int number = 1;
+        } 
+        @foreach(var person in Model)
+        {
+        <tr class="@(person.NumberOfPoints == 0 ? "greyed" : "")">
+            <td>@number</td>
+            <td>@person.FirstName</td>
+            <td>@person.SecondName</td>
+            <td>@person.NumberOfPoints</td>
+            <td>@person.City</td>
+            <td>@person.Team</td>
+            @{ 
+                number++;
+            }
+        </tr>
+        }
+
+</table>
+
+
+<style>
+    tr:nth-child(2), tr:nth-child(4), tr:nth-child(3){ 
+        background-color: springgreen;
+    }
+    
+    .greyed {
+        background-color: grey;
+    }
+</style>
+    
