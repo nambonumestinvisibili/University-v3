@@ -1,5 +1,5 @@
 # University-v3
-Stuff that stressed me out
+Tasks that made me understand computer science
 ## Analiza Numeryczna
 ## Matematyka Dyskretna
 ## WWW
